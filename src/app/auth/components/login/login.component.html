@@ -1,0 +1,49 @@
+<div class="bg" style="background-color: #f8f8f8">
+    <nz-spin [nzSpinning]="isSpinning" [nzSize]="'large'" nzTip="Working...">
+
+      <div class="parent">
+        <div class="child">
+          <div nz-row class="imgDiv">
+            <div nz-col nzSpan="24">
+              <h1 style="margin-left: 100px">Login</h1>
+            </div>
+          </div>
+  
+          <form nz-form [formGroup]="loginForm">
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please provide a valid email">
+                <nz-input-group nzPrefixIcon="shop">
+                   <input nz-input placeholder="Email" type="text" formControlName="email" />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+  
+            <nz-form-item>
+              <nz-form-control nzErrorTip="Please provide a valid password">
+                <input
+                  nz-input
+                  type="password"
+                  placeholder="Password"
+                  formControlName="password"
+                />
+                <ng-template #errorPass let-control>
+                  <ng-container *ngIf="control.hasError('required')">
+                    Please input your password!
+                  </ng-container>
+                  <ng-container *ngIf="control.hasError('minlength')">
+                    Please input at least 6 characters!
+                  </ng-container>
+                </ng-template>
+              </nz-form-control>
+            </nz-form-item>
+  
+            <button nz-button class="login-button" [nzType]="'primary'" style="margin-left: 80px" (click)="submitForm()" [disabled]="loginForm.invalid">
+              Log in
+            </button>
+            Or <a routerLink="/register">register now!</a>
+          </form>
+        </div>
+      </div>
+    </nz-spin>
+  </div>
+  
