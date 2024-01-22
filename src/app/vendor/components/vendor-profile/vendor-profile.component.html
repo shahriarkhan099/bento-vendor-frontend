@@ -1,0 +1,21 @@
+
+<div class="vendor-details-container mat-elevation-z2">
+  <div class="header mat-elevation-z1">
+    <h2>{{ vendor.name }}</h2>
+    <p>Email: {{ vendor.email }}</p>
+  </div>
+
+  <div class="details-section mat-elevation-z1">
+    <div class="basic-info">
+      <h3>Basic Information</h3>
+      <p>Vendor Type: {{ vendor.vendorType }}</p>
+      <p>Working Days: {{ vendor.workingDays.join(', ') }}</p>
+      <p>Opening Hours: {{ vendor.openingHours.startTime }} - {{ vendor.openingHours.endTime }}</p>
+      <p>Order Processing Time: {{ vendor.orderProcessingTime }} days</p>
+    </div>
+  </div>
+
+  <div class="update-button-container">
+    <button mat-raised-button color="primary" (click)="updateVendor()">Update Vendor</button>
+  </div>
+</div>

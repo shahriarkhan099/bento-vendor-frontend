@@ -119,53 +119,31 @@
       nzMode="inline"
       [nzInlineCollapsed]="isCollapsed"
     >
-      <li nz-submenu nzOpen nzTitle="Manage Inventory " nzIcon="dashboard">
+      <li nz-submenu nzOpen nzTitle="Manage Vendor" nzIcon="profile">
         <ul>
           <li nz-menu-item nzMatchRouter>
-            <a routerLink="/inventory-ingredients">Inventory Ingredients</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/login">Delivery Boxes</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/order-suggestions">Order Auto-Pilot</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/track-wastage">Track Wastage</a>
+            <a [routerLink]="'/dashboard/' + id + '/profile'">Vendor Profile</a>
           </li>
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="Manage Orders" nzIcon="unordered-list">
+      <li nz-submenu nzOpen nzTitle="Manage Products" nzIcon="unordered-list">
         <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/place-orders">Place Orders</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/order-history">Order History</a>
-          </li>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/order-status">Order Status</a>
-          </li>
           <!-- <li nz-menu-item nzMatchRouter>
-              <a routerLink="/schedule-order">Schedule Orders</a>
-            </li> -->
+            <a [routerLink]="'/dashboard/' + id +  '/order-history'">Order History</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="'/dashboard/' + id +  '/order-status'">Order Status</a>
+          </li> -->
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="'/dashboard/' + id +  '/suppliable-ingredients'">Suppliable Ingredients</a>
+          </li>
+          <li nz-menu-item nzMatchRouter>
+            <a [routerLink]="'/dashboard/' + id +  '/delivery-boxes'">Delivery Boxes</a>
+          </li>
         </ul>
       </li>
 
-      <li nz-submenu nzOpen nzTitle="Manage Suppliers" nzIcon="shop">
-        <ul>
-          <li nz-menu-item nzMatchRouter>
-            <a routerLink="/supplier-list">Supplier List</a>
-          </li>
-          <!-- <li nz-menu-item nzMatchRouter>
-              <a routerLink="/on-platform-suppliers">On-Platform Suppliers</a>
-            </li> -->
-          <!-- <li nz-menu-item nzMatchRouter>
-              <a routerLink="/sort-items">Sort Items</a>
-            </li> -->
-        </ul>
-      </li>
     </ul>
   </nz-sider>
   <nz-layout>

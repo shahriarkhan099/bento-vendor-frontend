@@ -22,8 +22,8 @@ import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { VendorDashboardComponent } from './vendor/components/vendor-dashboard/vendor-dashboard.component';
-import { SidebarComponent } from './vendor/components/sidebar/sidebar.component';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox'; 
 
 // For Form
 import { NzFormModule } from 'ng-zorro-antd/form'; // For Form
@@ -37,7 +37,10 @@ import { NzSelectModule } from 'ng-zorro-antd/select'; // For Drawer
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker'; // For Drawer
 
 // For Popconfirm
-import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm'; // For Popconfirm
+import { NzPopconfirmModule } from 'ng-zorro-antd/popconfirm';
+import { VendorProfileComponent } from './vendor/components/vendor-profile/vendor-profile.component';
+import { SuppliableIngredientsComponent } from './vendor/components/suppliable-ingredients/suppliable-ingredients.component';
+import { DeliveryBoxesComponent } from './vendor/components/delivery-boxes/delivery-boxes.component';
 
 
 
@@ -49,7 +52,9 @@ registerLocaleData(en);
     LoginComponent,
     SignupComponent,
     VendorDashboardComponent,
-    SidebarComponent
+    VendorProfileComponent,
+    SuppliableIngredientsComponent,
+    DeliveryBoxesComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,12 +78,10 @@ registerLocaleData(en);
     NzModalModule,
     NzPopconfirmModule,
     NzPaginationModule,
-    NzIconModule
-
+    NzIconModule,
+    NzCheckboxModule,
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US }
-  ],
-  bootstrap: [AppComponent]
+  providers: [{ provide: NZ_I18N, useValue: en_US }],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

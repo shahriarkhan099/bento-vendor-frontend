@@ -1,0 +1,241 @@
+<div *ngIf="showAddButton" nz-td [ngClass]="{ 'add-button-container': true }">
+  <button (click)="onAdd()" nz-form [ngClass]="{ 'add-button': true }">
+    Add
+  </button>
+</div>
+
+<nz-drawer
+  [nzBodyStyle]="{ overflow: 'auto' }"
+  [nzMaskClosable]="false"
+  [nzWidth]="920"
+  [nzVisible]="visible"
+  nzTitle="Inventory Ingredient"
+  [nzFooter]="footerTpl"
+  (nzOnClose)="close()"
+>
+  <form nz-form *nzDrawerContent (ngSubmit)="submitForm()">
+
+    <div nz-row [nzGutter]="8" class="mt" style="margin: 20px 0 10px 0">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label for="name">Ingredient Name</nz-form-label>
+
+          <nz-form-control>
+            <nz-select
+              nzPlaceHolder="Enter ingredient name"
+              [nzAllowClear]="true"
+              [(ngModel)]="name"
+              name="name"
+              [nzMaxTagCount]="1"
+              nzShowSearch
+            >
+              <nz-option
+                nz-input
+                id="name"
+                *ngFor="let el of ingredientList"
+                [nzValue]="el.ingredientName"
+                [nzLabel]="el.ingredientName"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="8" class="mt" style="margin: 0 0 10px 0">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Liquid</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzPlaceHolder="Enter liquid or not"
+              [nzAllowClear]="true"
+              [(ngModel)]="liquid"
+              name="liquid"
+              [nzMaxTagCount]="1"
+              nzShowSearch
+              (ngModelChange)="onLiquidChange(liquid)"
+            >
+              <nz-option
+                nz-input
+                id="liquid"
+                *ngFor="let el of booleanList"
+                [nzValue]="el"
+                [nzLabel]="el"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="8" class="mt" style="margin: 0 0 10px 0">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Unit Of Measurement</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzPlaceHolder="Enter unit of measurement"
+              [nzAllowClear]="true"
+              [(ngModel)]="unitOfStock"
+              name="unitOfStock"
+              [nzMaxTagCount]="1"
+              nzShowSearch
+            >
+              <nz-option
+                nz-input
+                id="unitOfStock"
+                *ngFor="let el of unitOfQuantityOptions"
+                [nzValue]="el"
+                [nzLabel]="el"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="8" class="mt" style="margin: 0 0 10px 0">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Minimum Order Amount</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              [(ngModel)]="minimumOrderAmount"
+              name="minimumOrderAmount"
+              placeholder="Enter minimum order amount"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+      <div nz-row [nzGutter]="8" class="mt" style="margin: 0 0 10px 0">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Price (USD)</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              [(ngModel)]="price"
+              name="price"
+              placeholder="Enter price"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="8" class="mt" style="margin: 0 0 10px 0">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Discount Volume</nz-form-label>
+          <nz-form-control>
+            <input
+              nz-input
+              [(ngModel)]="volumeDiscount"
+              name="volumeDiscount"
+              placeholder="Enter discount volume"
+            />
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+    <div nz-row [nzGutter]="8" class="mt" style="margin: 0 0 10px 0">
+      <div nz-col nzSpan="12">
+        <nz-form-item>
+          <nz-form-label>Expiry Date</nz-form-label>
+          <nz-form-control>
+            <nz-date-picker
+              [(ngModel)]="expiryDate"
+              name="expiryDate"
+              placeholder="Select expiry date"
+              [nzDisabledDate]="disabledDate"
+            ></nz-date-picker>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+    </div>
+
+
+  </form>
+
+  <ng-template #footerTpl>
+    <div style="float: right">
+      <button nz-button style="margin-right: 8px" (click)="close()">
+        Cancel
+      </button>
+      <button nz-button nzType="primary" (click)="submitForm()">Submit</button>
+    </div>
+  </ng-template>
+</nz-drawer>
+
+<h2>{{ tableTitle }}</h2>
+<nz-table
+  #rowSelectionTable
+  [nzData]="createdIngredients"
+  [nzFrontPagination]="frontPagination"
+  [nzTotal]="totalNumberOfData"
+  [nzPageIndex]="pageIndex"
+  [nzPageSize]="pageSize"
+  [nzShowPagination]="showPagination"
+  [nzPaginationPosition]="paginationPosition"
+  [nzPaginationType]="paginationType"
+  [nzBordered]="showBorder"
+  [nzOuterBordered]="outerBordered"
+  [nzSize]="sizeOfTable"
+  [nzLoading]="loadingStatus"
+  [nzFooter]="tableFooter"
+  [nzNoResult]="noResult"
+  [nzShowQuickJumper]="showQuickJumper"
+  [nzHideOnSinglePage]="hidePaginationOnSinglePage"
+>
+  <thead>
+    <tr>
+      <th>Ingredient Name</th>
+      <th>Minimum Order Amount</th>
+      <th>UOM</th>
+      <th>Price (USD)</th>
+      <th>Volume Discount</th>
+      <th>Expiry Date</th>
+      <th>Last Updated</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let data of rowSelectionTable.data">
+      <td>{{ data.name }}</td>
+      <td>{{ data.minimumOrderAmount }}</td>
+      <td>{{ data.unitOfStock }}</td>
+      <td>{{ data.price }}</td>
+      <td>{{ data.volumeDiscount }}</td>
+      <td>{{ data.expiryDate }}</td>
+      <td>{{ data.updatedAt }}</td>
+
+      <td>
+        <button
+          *ngIf="showDeleteButton"
+          nz-td
+          nz-popconfirm
+          nzPopconfirmTitle="Sure to delete?"
+          (nzOnConfirm)="onDelete(data.id)"
+          [ngClass]="{ 'delete-button': true }"
+        >
+          Delete
+        </button>
+        <button
+          *ngIf="showEditButton"
+          nz-td
+          (click)="onEdit(data)"
+          [ngClass]="{ 'edit-button': true }"
+        >
+          Edit
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</nz-table>
+

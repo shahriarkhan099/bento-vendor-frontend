@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { StorageService } from '../../../auth/services/storage/storage.service';
 
 @Component({
   selector: 'app-vendor-dashboard',
@@ -7,4 +8,5 @@ import { Component } from '@angular/core';
 })
 export class VendorDashboardComponent {
   isCollapsed = false;
+  id = StorageService.getId();
 }
