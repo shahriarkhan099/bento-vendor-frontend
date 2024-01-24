@@ -6,7 +6,7 @@ import { Subject, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class VendorService {
-  private apiUrl = 'http://localhost:5000/v1/vendor';
+  private apiUrl = 'https://bento-vendor.onrender.com/v1/vendor';
 
   constructor(private http: HttpClient) {}
 

@@ -6,7 +6,7 @@ import { Observable, Subject, map, tap } from 'rxjs';
   providedIn: 'root',
 })
 export class IngredientsService {
-  private apiUrl = 'http://localhost:5000/v1/product/vendor';
+  private apiUrl = 'https://bento-vendor.onrender.com/v1/product/vendor';
 
   private ingredientMappings: Record<string, number> = {};
 

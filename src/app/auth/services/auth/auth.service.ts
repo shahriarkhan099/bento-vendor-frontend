@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-const apiUrl = 'http://localhost:5000/v1';
+const apiUrl = 'https://bento-vendor.onrender.com/v1';
 
 @Injectable({
   providedIn: 'root'
