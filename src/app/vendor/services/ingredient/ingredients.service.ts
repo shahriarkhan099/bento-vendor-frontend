@@ -1,17 +1,21 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, map, tap } from 'rxjs';
+import { ConfigService } from '../config/config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class IngredientsService {
-  private apiUrl = 'https://bento-vendor.onrender.com/v1/product/vendor';
 
   private ingredientMappings: Record<string, number> = {};
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private configService: ConfigService) {
     this.loadIngredientMappings();
+  }
+
+  getVendorApiUrl(): string {
+    return this.configService.getVendorApiUrl();
   }
 
   private _refreshNeeded$ = new Subject<void>();
@@ -40,13 +44,13 @@ export class IngredientsService {
 
   getIngredients(id: number): Observable<any[]> {
     return this.http
-      .get<{ data: any[] }>(`${this.apiUrl}/${id}`)
+      .get<{ data: any[] }>(`${this.getVendorApiUrl()}/v1/product/vendor/${id}`)
       .pipe(map((response) => response.data));
   }
 
   addIngredient(ingredient: any): Observable<any> {
     return this.http
-      .post(`${this.apiUrl}/${ingredient.vendorId}`, ingredient)
+      .post(`${this.getVendorApiUrl()}/v1/product/vendor/${ingredient.vendorId}`, ingredient)
       .pipe(
         tap(() => {
           this._refreshNeeded$.next();
@@ -56,7 +60,7 @@ export class IngredientsService {
 
   editIngredient(ingredientId: number, ingredient: any): Observable<any> {
     return this.http
-      .put<void>(`${this.apiUrl}/${ingredient.vendorId}/${ingredientId}`, ingredient)
+      .put<void>(`${this.getVendorApiUrl()}/v1/product/vendor/${ingredient.vendorId}/${ingredientId}`, ingredient)
       .pipe(
         tap(() => {
           this._refreshNeeded$.next();
@@ -65,6 +69,6 @@ export class IngredientsService {
   }
 
   deleteIngredient(vendorId: number, productId: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${vendorId}/${productId}`);
+    return this.http.delete<void>(`${this.getVendorApiUrl()}/v1/product/vendor/${vendorId}/${productId}`);
   }
 }

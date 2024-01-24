@@ -1,14 +1,18 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Subject, tap } from 'rxjs';
+import { ConfigService } from '../config/config.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class VendorService {
-  private apiUrl = 'https://bento-vendor.onrender.com/v1/vendor';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private configService: ConfigService) {}
+
+  getVendorApiUrl(): string {
+    return this.configService.getVendorApiUrl();
+  }
 
   private _refreshNeeded$ = new Subject<void>();
 
@@ -17,7 +21,7 @@ export class VendorService {
   }
 
   getVendorById(id: number) {
-    return this.http.get(`${this.apiUrl}/${id}`).pipe(
+    return this.http.get(`${this.getVendorApiUrl()}/v1/vendor/${id}`).pipe(
       tap(() => {
         this._refreshNeeded$.next();
       })
@@ -25,7 +29,7 @@ export class VendorService {
   }
 
   updateVendorById(id: number, data: any) {
-    return this.http.put(`${this.apiUrl}/${id}`, data).pipe(
+    return this.http.put(`${this.getVendorApiUrl()}/v1/vendor/${id}`, data).pipe(
       tap(() => {
         this._refreshNeeded$.next();
       })
