@@ -71,4 +71,5 @@ export class IngredientsService {
   deleteIngredient(vendorId: number, productId: number): Observable<void> {
     return this.http.delete<void>(`${this.getVendorApiUrl()}/v1/product/vendor/${vendorId}/${productId}`);
   }
+  
 }
