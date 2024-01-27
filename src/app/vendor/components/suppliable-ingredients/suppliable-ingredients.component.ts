@@ -183,7 +183,7 @@ export class SuppliableIngredientsComponent implements OnInit {
     this.minimumOrderAmount = '';
     this.volumeDiscount = '';
     this.image = '';
-    this.expiryDate = new Date();
+    this.expiryDate = '';
   }
 
   id!: number | any;
@@ -194,7 +194,7 @@ export class SuppliableIngredientsComponent implements OnInit {
   minimumOrderAmount!: number | any;
   volumeDiscount!: number | any;
   image!: string;
-  expiryDate: Date = new Date();
+  expiryDate!: Date | any;
 
   totalNumberOfData = 0;
   pageIndex = 1;
