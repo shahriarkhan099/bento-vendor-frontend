@@ -219,6 +219,10 @@ export class SuppliableIngredientsComponent implements OnInit {
   showEditButton = true;
   showAddButton = true;
 
+  isIngredientExit(restaurantId: number, uniqueIngredientId: number): boolean {
+    return this.createdIngredients.filter(ingredient => ingredient.restaurantId === restaurantId && ingredient.uniqueIngredientId === uniqueIngredientId).length === 0;
+  }
+
   disabledDate = (current: Date): boolean => {
     return current && current.getTime() < this.getToday().getTime();
   };
