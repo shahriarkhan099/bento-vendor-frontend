@@ -33,7 +33,7 @@ export class LoginComponent implements OnInit {
         this.id = res.token.id;
         StorageService.saveToken(res.token.token);
         StorageService.saveId(res.token.id);
-        this.router.navigateByUrl(`/dashboard/${this.id}`);
+        this.router.navigateByUrl(`/dashboard/${this.id}/profile`);
       },
       error: (err: any) => {
         console.log(err);
