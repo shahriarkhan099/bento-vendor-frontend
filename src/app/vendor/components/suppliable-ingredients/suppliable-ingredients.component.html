@@ -115,7 +115,7 @@
       <div nz-row [nzGutter]="8" class="mt" style="margin: 0 0 10px 0">
       <div nz-col nzSpan="12">
         <nz-form-item>
-          <nz-form-label>Price (USD)</nz-form-label>
+          <nz-form-label>Total Price (GBP)</nz-form-label>
           <nz-form-control>
             <input
               nz-input
@@ -198,7 +198,7 @@
       <th>Ingredient Name</th>
       <th>Minimum Order Amount</th>
       <th>UOM</th>
-      <th>Price (USD)</th>
+      <th>Price (GBP)</th>
       <th>Volume Discount</th>
       <th>Expiry Date</th>
       <th>Last Updated</th>
@@ -210,7 +210,7 @@
       <td>{{ data.name }}</td>
       <td>{{ data.minimumOrderAmount }}</td>
       <td>{{ data.unitOfStock }}</td>
-      <td>{{ data.price }}</td>
+      <td>{{ data.price | currency:'£' }}</td>
       <td>{{ data.volumeDiscount }}</td>
       <td>{{ data.expiryDate }}</td>
       <td>{{ data.updatedAt }}</td>
