@@ -32,4 +32,6 @@ export class VendorProfileComponent implements OnInit {
       this.getVendor();
     });
   }
+
+  time = new Date();
 }

@@ -17,6 +17,5 @@ export class VendorDashboardComponent {
     localStorage.removeItem('accessToken');
     StorageService.logout();
     this.router.navigateByUrl('/logout');
-    // window.location.href = 'https://getbento.vercel.app/logout';
   }
 }
